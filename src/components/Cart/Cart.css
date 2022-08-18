@@ -1,0 +1,12 @@
+.cart-container{
+    background-color: tomato;
+    height: 100vh;
+    padding: 15px;
+    line-height: 16px;
+    border-radius: 5px;
+    position: sticky;
+    top: 0;
+}
+.cart-header{
+    Text-align: center;
+}

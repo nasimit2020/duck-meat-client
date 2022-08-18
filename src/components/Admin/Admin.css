@@ -1,0 +1,18 @@
+.admin-container{
+    height: 100vh;
+}
+.navbar-container{
+    background-color: rgb(32, 54, 50);
+}
+.addProduct-container{
+    background-color: rgb(124, 242, 250);
+}
+.navbar-container ul li{
+    list-style-type: none;
+    padding: 5px 0;
+}
+.navbar-container ul li a{
+    text-decoration: none;
+    color: #fff;
+    
+}
