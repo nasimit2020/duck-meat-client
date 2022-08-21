@@ -1,11 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from '../../App';
+import { getStoredCart } from '../../utilities/fakedb';
+import { useState } from 'react';
 
 const Navbar = (props) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+    const [quantity, setQuantity] = useState();
+    useEffect(() => {
+        const getStoredData = getStoredCart();
+        console.log(getStoredData);
+        let quantity = 0;
+        for (const count in getStoredData) {
+            quantity = quantity + getStoredData[count];
+        }
+        setQuantity(quantity)
+    }, []);
     return (
         <div className="">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,12 +35,6 @@ const Navbar = (props) => {
                                 <Link className="nav-link" to="/admin">Admin</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/admin">Blog</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/admin">Contact</Link>
-                            </li>
-                            <li className="nav-item">
                                 <Link className="nav-link" to="/checkOut">Orders</Link>
                             </li>
                             <li className="nav-item">
@@ -38,7 +44,7 @@ const Navbar = (props) => {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/checkOut">
-                                    <FontAwesomeIcon icon={faCartShopping} /><span className="text-danger">{0}</span>
+                                    <FontAwesomeIcon icon={faCartShopping} /><span className="text-danger">{quantity}</span>
                                 </Link>
                             </li>
                         </ul>

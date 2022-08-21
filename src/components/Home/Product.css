@@ -1,0 +1,8 @@
+.col .card .card-footer{
+    background-color: white;
+    border-top: none !important;
+    text-align: center;
+}
+.card-footer li{
+    list-style-type: none;
+}

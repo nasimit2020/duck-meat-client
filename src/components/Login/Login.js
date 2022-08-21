@@ -12,7 +12,13 @@ import firebaseConfig from '../Firebase/Firebase.config';
 
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({
+        isSignin: false,
+        displayName: '',
+        email: '',
+        uid: '',
+        photoURL: ''
+    })
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
@@ -28,9 +34,15 @@ const Login = () => {
                 const token = credential.accessToken;
                 // The signed-in user info.
                 const user = result.user;
-                // ...
-                setUser(result);
-                setLoggedInUser(user)
+                const userLogin = {
+                    isSignin: true,
+                    displayName: user.displayName,
+                    email: user.email,
+                    uid: user.uid,
+                    photoURL: user.photoURL,
+                };
+                setUser(userLogin);
+                setLoggedInUser(userLogin)
                 navigate(location.state.from);
             }).catch((error) => {
                 // Handle Errors here.
@@ -47,13 +59,13 @@ const Login = () => {
     return (
         <div className="container">
             <Navbar></Navbar>
-            {loggedInUser.email ? <Admin/> : 
-            <div className="text-center mt-5 ">
-                <div className="login-container p-3 border border-success">
-                    <h5 className="pb-2">Login</h5>
-                    <button onClick={() => handleSignInWithGooglePopUp()} type="button" className="btn btn-primary">Continue with Google</button>
-                </div>
-            </div>}
+            {loggedInUser.email ? <Admin /> :
+                <div className="text-center mt-5 ">
+                    <div className="login-container p-3 border border-success">
+                        <h5 className="pb-2">Login</h5>
+                        <button onClick={() => handleSignInWithGooglePopUp()} type="button" className="btn btn-primary">Continue with Google</button>
+                    </div>
+                </div>}
         </div>
     );
 };

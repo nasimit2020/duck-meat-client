@@ -21,10 +21,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup/*" element={<Login />} />
-          <Route path="/checkOut" element={<CheckOut />} />
           <Route element={<PrivateRoute />}>
             <Route path="/orderSubmit" element={<OrderSubmit />} />
             <Route path="/admin/*" element={<Admin />} />
+            <Route path="/checkOut" element={<CheckOut />} />
           </Route>
         </Routes>
       </UserContext.Provider>
