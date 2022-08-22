@@ -18,7 +18,7 @@ const Home = () => {
         for (const id in getStoredData) {
             const addededProduct = products.find(product => product._id === id);
             // console.log(addededProduct);
-            if(addededProduct){
+            if (addededProduct) {
                 const quantity = getStoredData[id];
                 addededProduct.quantity = quantity
                 savedCart.push(addededProduct);
@@ -30,11 +30,11 @@ const Home = () => {
     const handleAddToCart = (selectedProduct) => {
         const exists = cart.find(product => product._id === selectedProduct._id);
         let newCart = [];
-        if(!exists) {
+        if (!exists) {
             selectedProduct.quantity = 1;
             newCart = [...cart, selectedProduct];
         }
-        else{
+        else {
             const rest = cart.filter(product => product._id !== selectedProduct._id);
             exists.quantity = exists.quantity + 1;
             newCart = [...rest, exists];
@@ -49,6 +49,11 @@ const Home = () => {
             <Navbar></Navbar>
             <div className="d-flex">
                 <div className="row row-cols-1 row-cols-md-3 g-4 me-2">
+                    {
+                        products.length === 0 && <div class="spinner-border text-primary " role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    }
                     {
                         products.map((product, _id) => <Product
                             product={product}

@@ -42,28 +42,23 @@ const AddProduct = () => {
           });
     }
     return (
-        <div className="p-5">
+        <div className="">
             <h5>Add Product</h5>
             <form onSubmit={handleSubmit(onSubmit)} >
-                <div className="row">
-                    <div className="col-md-6">
+                <div className="col-6">
                         <label>Product Name</label>
-                        <input className="form-control" {...register("productName")} />
-                    </div>
-                    <div className="col-md-6">
+                        <input className="form-control" {...register("productName")} /> 
+                        <br />
                         <label>Wight</label>
                         <input className="form-control" {...register("wight")} />
-                    </div>
-                    <div className="col-md-6">
+                        <br />
                         <label>Add Price</label>
                         <input className="form-control" {...register("price")} />
-                    </div>
-                    <div className="col-md-6 mt-4">
+                        <br />
                         <input type="file" className="form-control" onChange={handleImageUpload}/>
-                    </div>
-                    <div className="col-md-2 mt-4 ms-auto">
+                        <br />
                         <input type="submit" className="form-control bg-primary" />
-                    </div>
+                    
                 </div>
             </form>
         </div>

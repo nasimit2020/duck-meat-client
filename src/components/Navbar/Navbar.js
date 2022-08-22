@@ -6,7 +6,7 @@ const Navbar = (props) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     const signOut = () => {
         loggedInUser.email = '';
-      }
+    }
     return (
         <div className="">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -21,16 +21,22 @@ const Navbar = (props) => {
                                 <Link className="nav-link" to="/">Home</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className="nav-link" to="/orders">Orders</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className="nav-link" to="/admin">Admin</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/checkOut">Checkout</Link>
                             </li>
                             <li className="nav-item">
-                                {
-                                    loggedInUser.email ? <button onClick={signOut} className="btn btn-warning">{loggedInUser.displayName}</button> : <Link className="nav-link" to="/signup">Login</Link>
-                                }
+                                <Link className="nav-link first" to="/">
+                                    {
+                                        loggedInUser.email ? <button onClick={signOut} className="btn btn-warning">{loggedInUser.displayName}</button> : <Link style={{padding: '0px'}} className="nav-link" to="/signup">Login</Link>
+                                    }
+                                </Link>
                             </li>
+
                         </ul>
                     </div>
                 </div>
