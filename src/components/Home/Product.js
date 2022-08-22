@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import './Product.css';
 
 const Product = (props) => {
-    const handleAddToProduct = props.handleAddToProduct;
-    const { productName, price, wight, imageURL, _id } = props.product;
+    const handleAddToCart = props.handleAddToCart;
+    const { productName, price, wight, imageURL} = props.product;
+
     return (
         <div className="col ">
             <div className="card h-100">
@@ -14,9 +15,9 @@ const Product = (props) => {
                     <p className="card-text">Stock: {wight} kg</p>
                     <p className="card-text">Price: {price} tk. per kg</p>
                 </div>
-                <div class="card-footer">
+                <div className="card-footer">
                     <Link className="nav-link" to="/checkOut">
-                        <button onClick={() => handleAddToProduct(props.product, _id)} className="btn btn-warning">Buy Now</button>
+                        <button onClick={() => handleAddToCart(props.product)} className="btn btn-warning">Buy Now</button>
                     </Link>
                 </div>
             </div>

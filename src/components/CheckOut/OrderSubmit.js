@@ -1,16 +1,37 @@
-import React, { useContext} from 'react';
+import React, { useContext, useEffect, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { UserContext } from '../../App';
-import { clearTheCart, getStoredCart } from '../../utilities/fakedb';
+import { deleteShoppingCart, getStoredCart } from '../../utilities/fakedb';
 import Navbar from '../Navbar/Navbar';
 import './OrderSubmit.css'
 
+
 const OrderSubmit = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const { register, handleSubmit, reset, control, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset,  formState: { errors } } = useForm();
+    const [products, setProducts] = useState([]);
+    const [cart, setCart] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/products')
+            .then(res => res.json())
+            .then(data => setProducts(data))
+    }, [])
+
+    useEffect(() => {
+        const getStoredData = getStoredCart();
+        let savedCart = [];
+        for (const id in getStoredData) {
+            const addededProduct = products.find(product => product._id === id);
+            if(addededProduct){
+                const quantity = getStoredData[id];
+                addededProduct.quantity = quantity
+                savedCart.push(addededProduct);
+            }
+        }
+        setCart(savedCart);
+    }, [products]);
     const onSubmit = (data) => {
-        const savedCart = getStoredCart();
-        const orderDetails = {...loggedInUser, products: savedCart, shipment: data}
+        const orderDetails = {...loggedInUser, products: cart[0], shipment: data, date: new Date()};
         fetch('http://localhost:5000/orderSubmit', {
             method: 'POST',
             headers: {
@@ -23,6 +44,7 @@ const OrderSubmit = () => {
             alert("Order Submitted");
         })
         reset();
+        deleteShoppingCart();
     };
     
 
@@ -33,7 +55,7 @@ const OrderSubmit = () => {
         <div className="">
             <Navbar></Navbar>
             <div className="w-50 form-design">
-                <h2 className="text-center">Type Delivery Address</h2>
+                <h2 className="text-center">Delivery Address</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input placeholder="Name" {...register("name")} className="form-control" /> <br />
                     <input placeholder="Email" value={loggedInUser.email}  {...register("email")} className="form-control" /> <br />

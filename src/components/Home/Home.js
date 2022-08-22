@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addToDb, getStoredCart} from '../../utilities/fakedb';
-import Cart from '../Cart/Cart';
+import { addToDb, getStoredCart } from '../../utilities/fakedb';
 import Navbar from '../Navbar/Navbar';
 import './Home.css';
 import Product from './Product';
@@ -49,19 +48,14 @@ const Home = () => {
         <div className="container">
             <Navbar></Navbar>
             <div className="d-flex">
-                <div className="col-9">
-                    <div className="row row-cols-1 row-cols-md-2 g-4 me-2">
-                        {
-                            products.map((product, _id) => <Product
-                                product={product}
-                                key={_id}
-                                handleAddToCart={handleAddToCart}
-                            ></Product>)
-                        }
-                    </div>
-                </div>
-                <div className="col-3 cart-container">
-                    <Cart cart={cart}></Cart>
+                <div className="row row-cols-1 row-cols-md-3 g-4 me-2">
+                    {
+                        products.map((product, _id) => <Product
+                            product={product}
+                            key={_id}
+                            handleAddToCart={handleAddToCart}
+                        ></Product>)
+                    }
                 </div>
             </div>
         </div>

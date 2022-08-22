@@ -1,23 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { UserContext } from '../../App';
-import { getStoredCart } from '../../utilities/fakedb';
-import { useState } from 'react';
 
 const Navbar = (props) => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [quantity, setQuantity] = useState();
-    useEffect(() => {
-        const getStoredData = getStoredCart();
-        console.log(getStoredData);
-        let quantity = 0;
-        for (const count in getStoredData) {
-            quantity = quantity + getStoredData[count];
-        }
-        setQuantity(quantity)
-    }, []);
+    const signOut = () => {
+        loggedInUser.email = '';
+      }
     return (
         <div className="">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,17 +24,12 @@ const Navbar = (props) => {
                                 <Link className="nav-link" to="/admin">Admin</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/checkOut">Orders</Link>
+                                <Link className="nav-link" to="/checkOut">Checkout</Link>
                             </li>
                             <li className="nav-item">
                                 {
-                                    loggedInUser.email ? <p className="btn btn-warning">{loggedInUser.displayName}</p> : <Link className="nav-link" to="/signup">Login</Link>
+                                    loggedInUser.email ? <button onClick={signOut} className="btn btn-warning">{loggedInUser.displayName}</button> : <Link className="nav-link" to="/signup">Login</Link>
                                 }
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/checkOut">
-                                    <FontAwesomeIcon icon={faCartShopping} /><span className="text-danger">{quantity}</span>
-                                </Link>
                             </li>
                         </ul>
                     </div>

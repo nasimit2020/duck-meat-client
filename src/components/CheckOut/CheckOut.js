@@ -17,7 +17,7 @@ const CheckOut = () => {
         let savedCart = [];
         for (const id in getStoredData) {
             const addededProduct = products.find(product => product._id === id);
-            if(addededProduct){
+            if (addededProduct) {
                 const quantity = getStoredData[id];
                 addededProduct.quantity = quantity
                 savedCart.push(addededProduct);
@@ -28,8 +28,8 @@ const CheckOut = () => {
 
     let total = 0;
     for (const product of cart) {
-        // const subTotal = product.quantity * product.price;
-        // total = total + subTotal;
+        const subTotal = product.quantity * product.price;
+        total = total + subTotal;
         total = total + parseFloat(product.price);
     }
 
@@ -46,22 +46,20 @@ const CheckOut = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        cart.map(pd =>
-                            <tr>
-                                <td>{pd.productName}</td>
-                                {/* <td>{pd.quantity}</td> */}
-                                <td>{1}</td>
-                                {/* <td>{pd.quantity * pd.price}</td> */}
-                                <td>{pd.price}</td>
-                            </tr>
-                        )
-                    }
+                    {cart.map(product =>
+                        <tr>
+                            <td>{product.productName}</td>
+                            {/* <td>{pd.quantity}</td> */}
+                            <td>{1}</td>
+                            {/* <td>{pd.quantity * pd.price}</td> */}
+                            <td>{cart[0].price}</td>
+                        </tr>
+                    )}
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="2">Total</td>
-                        <td className="fw-bold">{total}</td>
+                        <td className="fw-bold">{ }</td>
                     </tr>
                 </tfoot>
             </table>

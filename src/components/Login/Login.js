@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import './Login.css'
 import { initializeApp } from "firebase/app";
@@ -12,13 +12,6 @@ import firebaseConfig from '../Firebase/Firebase.config';
 
 const Login = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const [user, setUser] = useState({
-        isSignin: false,
-        displayName: '',
-        email: '',
-        uid: '',
-        photoURL: ''
-    })
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
@@ -35,13 +28,9 @@ const Login = () => {
                 // The signed-in user info.
                 const user = result.user;
                 const userLogin = {
-                    isSignin: true,
                     displayName: user.displayName,
                     email: user.email,
-                    uid: user.uid,
-                    photoURL: user.photoURL,
                 };
-                setUser(userLogin);
                 setLoggedInUser(userLogin)
                 navigate(location.state.from);
             }).catch((error) => {
