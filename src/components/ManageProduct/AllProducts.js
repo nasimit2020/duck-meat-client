@@ -7,7 +7,7 @@ import { pink } from '@mui/material/colors';
 const AllProducts = (props) => {
     const { productName, price, wight, _id } = props.product;
     const deleteProduct = (_id) => {
-        const url = `http://localhost:5000/delete/${_id}`
+        const url = `https://fast-garden-94911.herokuapp.com/delete/${_id}`
         fetch(url, {
             method: 'DELETE',
         })

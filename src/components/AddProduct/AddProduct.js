@@ -15,7 +15,7 @@ const AddProduct = () => {
             imageURL: imageURL,
         }
         console.log(addProduct);
-        fetch('http://localhost:5000/admin/addProduct', {
+        fetch('https://fast-garden-94911.herokuapp.com/admin/addProduct', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

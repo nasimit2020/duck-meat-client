@@ -8,7 +8,7 @@ const CustomersOrder = () => {
     const [yourOrders, setYourOrders] = useState([]);
     console.log(yourOrders);
     useEffect(() => {
-        const url = `http://localhost:5000/yourOrders/${email}`
+        const url = `https://fast-garden-94911.herokuapp.com/yourOrders/${email}`
         fetch(url)
         .then(res => res.json())
         .then(data => setYourOrders(data))
